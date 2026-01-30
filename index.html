@@ -457,6 +457,20 @@
             margin-right: 20px;
         }
 
+        .phone-input-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .phone-input-group select {
+            width: 110px;
+            flex-shrink: 0;
+        }
+
+        .phone-input-group input {
+            flex: 1;
+        }
+
         /* Results Section */
         .results-section {
             min-height: 100vh;
@@ -831,6 +845,16 @@
                 padding: 10px 14px;
                 font-size: 0.9rem;
                 border-radius: 8px;
+            }
+
+            .phone-input-group {
+                gap: 8px;
+            }
+
+            .phone-input-group select {
+                width: 95px;
+                font-size: 0.85rem;
+                padding: 10px 8px;
             }
 
             .form-group.half {
@@ -1295,33 +1319,31 @@
                         <input type="email" id="email" name="email" required>
                     </div>
                     <div class="form-group">
-                        <label for="phone">Teléfono (WhatsApp) *</label>
-                        <input type="tel" id="phone" name="phone" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="country">País de Residencia *</label>
-                        <select id="country" name="country" required>
-                            <option value="">Selecciona tu país</option>
-                            <option value="Mexico">México</option>
-                            <option value="Colombia">Colombia</option>
-                            <option value="Argentina">Argentina</option>
-                            <option value="Chile">Chile</option>
-                            <option value="Peru">Perú</option>
-                            <option value="Spain">España</option>
-                            <option value="Venezuela">Venezuela</option>
-                            <option value="Ecuador">Ecuador</option>
-                            <option value="Other">Otro</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="educationLevel">Nivel Educativo Actual *</label>
-                        <select id="educationLevel" name="educationLevel" required>
-                            <option value="">Selecciona tu nivel</option>
-                            <option value="High School">Preparatoria/Bachillerato</option>
-                            <option value="Undergraduate">Licenciatura en curso</option>
-                            <option value="Graduate">Licenciatura completada</option>
-                            <option value="Postgraduate">Posgrado</option>
-                        </select>
+                        <label for="phone">WhatsApp *</label>
+                        <div class="phone-input-group">
+                            <select id="countryCode" name="countryCode" required>
+                                <option value="+52">🇲🇽 +52</option>
+                                <option value="+57">🇨🇴 +57</option>
+                                <option value="+54">🇦🇷 +54</option>
+                                <option value="+56">🇨🇱 +56</option>
+                                <option value="+51">🇵🇪 +51</option>
+                                <option value="+34">🇪🇸 +34</option>
+                                <option value="+58">🇻🇪 +58</option>
+                                <option value="+593">🇪🇨 +593</option>
+                                <option value="+1">🇺🇸 +1</option>
+                                <option value="+55">🇧🇷 +55</option>
+                                <option value="+502">🇬🇹 +502</option>
+                                <option value="+503">🇸🇻 +503</option>
+                                <option value="+504">🇭🇳 +504</option>
+                                <option value="+505">🇳🇮 +505</option>
+                                <option value="+506">🇨🇷 +506</option>
+                                <option value="+507">🇵🇦 +507</option>
+                                <option value="+591">🇧🇴 +591</option>
+                                <option value="+595">🇵🇾 +595</option>
+                                <option value="+598">🇺🇾 +598</option>
+                            </select>
+                            <input type="tel" id="phone" name="phone" placeholder="Número sin código" required>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
                         Ver Mis Resultados
@@ -1608,17 +1630,19 @@
             const baseURL = 'https://vocacional.classeducation.com';
             const firstName = formData.get('firstName');
             const resultURL = `${baseURL}/resultados/${profile}.html?nombre=${encodeURIComponent(firstName)}`;
+            // Combinar código de país + número de WhatsApp
+            const countryCode = formData.get('countryCode');
+            const phoneNumber = formData.get('phone');
+            const fullWhatsApp = countryCode + phoneNumber;
+
             testState.userData = {
                 First_Name: formData.get('firstName'),
                 Last_Name: formData.get('lastName'),
                 Email: formData.get('email'),
-                Phone: formData.get('phone'),
-                Country: formData.get('country'),
-                Education_Level: formData.get('educationLevel'),
+                WhatsApp: fullWhatsApp,
                 Lead_Source: 'Meta Ads - Test Vocacional',
                 Test_Answers: JSON.stringify(testState.answers),
                 Test_Date: new Date().toISOString(),
-                // Nuevos campos para el email
                 Profile_ID: profile,
                 Profile_Name: profileNames[profile],
                 Result_URL: resultURL
