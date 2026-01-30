@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Vocacional - Descubre tu Futuro en el Extranjero</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #cf142c;
+            --secondary: #000000;
+            --accent: #ff3a4f;
+            --dark: #1a1a1a;
+            --light: #FAFAFA;
+            --success: #06D6A0;
+            --gray: #444444;
+            --gradient-1: linear-gradient(135deg, #cf142c 0%, #8b0d1c 100%);
+            --gradient-2: linear-gradient(135deg, #ff3a4f 0%, #cf142c 100%);
+            --gradient-3: linear-gradient(135deg, #cf142c 0%, #000000 100%);
+            --gradient-hero: linear-gradient(135deg, #cf142c 0%, #a01024 50%, #6b0a15 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+            background: var(--gradient-hero);
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.15) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, -30px) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-logo {
+            height: 80px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.8rem, 5vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 400;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 35px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: #333333;
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: white;
+            padding: 12px 20px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            display: none;
+        }
+
+        .progress-container.active {
+            display: block;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+            }
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 6px;
+            background: #E0E0E0;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--gradient-hero);
+            border-radius: 10px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.3),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+
+        .progress-logo {
+            height: 40px;
+            width: auto;
+            border-radius: 4px;
+        }
+
+        .progress-text {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        /* Question Section */
+        .question-section {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+        }
+
+        .question-section.active {
+            display: flex;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .question-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.08);
+            max-width: 700px;
+            width: 100%;
+            animation: scaleIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .question-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 12px;
+        }
+
+        .question-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.2rem, 3vw, 1.6rem);
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .option {
+            background: var(--light);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 14px 18px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(207, 20, 44, 0.1), transparent);
+            transition: left 0.5s;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            border-color: var(--primary);
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(207, 20, 44, 0.2);
+        }
+
+        .option.selected {
+            background: linear-gradient(135deg, rgba(207, 20, 44, 0.1) 0%, rgba(207, 20, 44, 0.05) 100%);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(207, 20, 44, 0.3);
+        }
+
+        .option-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+            background: white;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .option-text {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--dark);
+            flex: 1;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 12px;
+            margin-top: 25px;
+            justify-content: space-between;
+        }
+
+        /* Lead Form */
+        .lead-form-section {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .lead-form-section.active {
+            display: flex;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .lead-form-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .form-logo {
+            display: block;
+            height: 50px;
+            width: auto;
+            margin: 0 auto 20px;
+            border-radius: 6px;
+        }
+
+        .lead-form-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.4rem, 3vw, 1.8rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .lead-form-card p {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid #E0E0E0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            font-family: 'Roboto', sans-serif;
+            transition: all 0.3s;
+            background: var(--light);
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(207, 20, 44, 0.1);
+        }
+
+        .form-group.half {
+            display: inline-block;
+            width: calc(50% - 10px);
+        }
+
+        .form-group.half:first-child {
+            margin-right: 20px;
+        }
+
+        /* Results Section */
+        .results-section {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            background: var(--gradient-hero);
+        }
+
+        .results-section.active {
+            display: flex;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 20px;
+            padding: 35px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            max-width: 650px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .results-logo {
+            display: block;
+            height: 50px;
+            width: auto;
+            margin: 0 auto 15px;
+            border-radius: 6px;
+        }
+
+        .results-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+            animation: bounceIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .results-card h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.3rem, 3vw, 1.8rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .results-card .career-title {
+            font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 20px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .results-description {
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .recommended-programs {
+            background: var(--light);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .recommended-programs h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .program-list {
+            list-style: none;
+        }
+
+        .program-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #E0E0E0;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .program-list li:last-child {
+            border-bottom: none;
+        }
+
+        .program-list li::before {
+            content: '✨';
+            font-size: 1rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid rgba(207, 20, 44, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Analysis Loader */
+        .analysis-loader {
+            min-height: 100vh;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 80px 20px 40px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        }
+
+        .analysis-loader.active {
+            display: flex;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        .analysis-card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .analysis-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .analysis-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 4px solid rgba(207, 20, 44, 0.1);
+            border-radius: 50%;
+        }
+
+        .analysis-icon::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border: 4px solid transparent;
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .analysis-brain {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 28px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.8; }
+        }
+
+        .analysis-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        .analysis-text {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .analysis-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .analysis-dots span {
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: bounce 1.4s ease-in-out infinite;
+        }
+
+        .analysis-dots span:nth-child(1) { animation-delay: 0s; }
+        .analysis-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .analysis-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero {
+                min-height: auto;
+                padding: 60px 20px;
+            }
+
+            .hero-logo {
+                height: 50px;
+                margin-bottom: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .progress-container {
+                padding: 10px 15px;
+            }
+
+            .progress-logo {
+                height: 32px;
+            }
+
+            .progress-text {
+                font-size: 0.75rem;
+            }
+
+            .question-section,
+            .lead-form-section,
+            .results-section {
+                min-height: auto;
+                padding: 70px 15px 30px;
+            }
+
+            .question-card,
+            .lead-form-card,
+            .results-card {
+                padding: 25px 20px;
+                border-radius: 16px;
+            }
+
+            .question-number {
+                font-size: 0.7rem;
+                margin-bottom: 8px;
+            }
+
+            .question-title {
+                font-size: 1.1rem;
+                margin-bottom: 18px;
+            }
+
+            .options {
+                gap: 8px;
+            }
+
+            .option {
+                padding: 12px 14px;
+                gap: 12px;
+                border-radius: 10px;
+            }
+
+            .option-icon {
+                width: 36px;
+                height: 36px;
+                font-size: 18px;
+                border-radius: 8px;
+            }
+
+            .option-text {
+                font-size: 0.88rem;
+            }
+
+            .navigation {
+                margin-top: 20px;
+                gap: 10px;
+            }
+
+            .btn {
+                padding: 12px 24px;
+                font-size: 0.85rem;
+                width: 100%;
+            }
+
+            .form-logo,
+            .results-logo {
+                height: 40px;
+                margin-bottom: 12px;
+            }
+
+            .lead-form-card h2,
+            .results-card h2 {
+                font-size: 1.2rem;
+            }
+
+            .lead-form-card p {
+                font-size: 0.88rem;
+                margin-bottom: 20px;
+            }
+
+            .form-group {
+                margin-bottom: 14px;
+            }
+
+            .form-group label {
+                font-size: 0.8rem;
+                margin-bottom: 5px;
+            }
+
+            .form-group input,
+            .form-group select {
+                padding: 10px 14px;
+                font-size: 0.9rem;
+                border-radius: 8px;
+            }
+
+            .form-group.half {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .results-icon {
+                font-size: 40px;
+                margin-bottom: 12px;
+            }
+
+            .results-card .career-title {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+            .results-description {
+                font-size: 0.88rem;
+                margin-bottom: 20px;
+            }
+
+            .recommended-programs {
+                padding: 15px;
+                border-radius: 10px;
+                margin-bottom: 20px;
+            }
+
+            .recommended-programs h3 {
+                font-size: 1rem;
+                margin-bottom: 12px;
+            }
+
+            .program-list li {
+                padding: 8px 0;
+                font-size: 0.85rem;
+                gap: 8px;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .privacy-notice {
+                font-size: 0.75rem;
+                margin-top: 15px;
+            }
+
+            .analysis-loader {
+                padding: 70px 15px 30px;
+            }
+
+            .analysis-card {
+                padding: 30px 25px;
+                border-radius: 16px;
+            }
+
+            .analysis-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
+            }
+
+            .analysis-brain {
+                font-size: 24px;
+            }
+
+            .analysis-title {
+                font-size: 1.1rem;
+            }
+
+            .analysis-text {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Privacy Notice */
+        .privacy-notice {
+            font-size: 0.85rem;
+            color: #999;
+            text-align: center;
+            margin-top: 20px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div class="progress-container" id="progressContainer">
+        <div class="container">
+            <div class="progress-header">
+                <img src="assets/logo-class-education.png" alt="Class Education" class="progress-logo">
+                <div class="progress-text">
+                    <span id="progressText">Pregunta 1 de 10</span>
+                </div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero" id="heroSection">
+        <div class="container">
+            <div class="hero-content">
+                <img src="assets/logo-class-education.png" alt="Class Education" class="hero-logo">
+                <h1>Descubre tu Carrera Ideal en el Extranjero</h1>
+                <p>Test vocacional personalizado · 2 minutos · Resultados instantáneos</p>
+                <button class="btn btn-primary" onclick="startTest()">Comenzar Test Gratuito</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Question Sections -->
+    <section class="question-section" id="question1">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 1 de 10</div>
+                <h2 class="question-title">¿Qué tipo de actividades disfrutas más?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(1, 'creative')" data-value="creative">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-text">Actividades creativas y artísticas</div>
+                    </div>
+                    <div class="option" onclick="selectOption(1, 'analytical')" data-value="analytical">
+                        <div class="option-icon">🔬</div>
+                        <div class="option-text">Análisis de datos y resolución de problemas</div>
+                    </div>
+                    <div class="option" onclick="selectOption(1, 'social')" data-value="social">
+                        <div class="option-icon">👥</div>
+                        <div class="option-text">Trabajo en equipo y ayudar a otros</div>
+                    </div>
+                    <div class="option" onclick="selectOption(1, 'entrepreneurial')" data-value="entrepreneurial">
+                        <div class="option-icon">💼</div>
+                        <div class="option-text">Liderar proyectos y tomar decisiones</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="nextQuestion(1)" style="margin-left: auto;" disabled id="nextBtn1">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question2">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 2 de 10</div>
+                <h2 class="question-title">¿Cuál es tu materia favorita?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(2, 'humanities')" data-value="humanities">
+                        <div class="option-icon">📚</div>
+                        <div class="option-text">Humanidades (Literatura, Historia, Filosofía)</div>
+                    </div>
+                    <div class="option" onclick="selectOption(2, 'sciences')" data-value="sciences">
+                        <div class="option-icon">⚗️</div>
+                        <div class="option-text">Ciencias (Física, Química, Biología)</div>
+                    </div>
+                    <div class="option" onclick="selectOption(2, 'math')" data-value="math">
+                        <div class="option-icon">🔢</div>
+                        <div class="option-text">Matemáticas y Lógica</div>
+                    </div>
+                    <div class="option" onclick="selectOption(2, 'arts')" data-value="arts">
+                        <div class="option-icon">🎭</div>
+                        <div class="option-text">Artes y Diseño</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(2)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(2)" disabled id="nextBtn2">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question3">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 3 de 10</div>
+                <h2 class="question-title">¿Cómo prefieres trabajar?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(3, 'independent')" data-value="independent">
+                        <div class="option-icon">🚀</div>
+                        <div class="option-text">De forma independiente con autonomía</div>
+                    </div>
+                    <div class="option" onclick="selectOption(3, 'team')" data-value="team">
+                        <div class="option-icon">🤝</div>
+                        <div class="option-text">En equipo colaborativo</div>
+                    </div>
+                    <div class="option" onclick="selectOption(3, 'leadership')" data-value="leadership">
+                        <div class="option-icon">👑</div>
+                        <div class="option-text">Liderando y dirigiendo equipos</div>
+                    </div>
+                    <div class="option" onclick="selectOption(3, 'support')" data-value="support">
+                        <div class="option-icon">🤲</div>
+                        <div class="option-text">Apoyando y asistiendo a otros</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(3)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(3)" disabled id="nextBtn3">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question4">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 4 de 10</div>
+                <h2 class="question-title">¿Qué ambiente laboral prefieres?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(4, 'office')" data-value="office">
+                        <div class="option-icon">🏢</div>
+                        <div class="option-text">Oficina corporativa estructurada</div>
+                    </div>
+                    <div class="option" onclick="selectOption(4, 'creative')" data-value="creative">
+                        <div class="option-icon">🎨</div>
+                        <div class="option-text">Espacio creativo e informal</div>
+                    </div>
+                    <div class="option" onclick="selectOption(4, 'outdoor')" data-value="outdoor">
+                        <div class="option-icon">🌳</div>
+                        <div class="option-text">Al aire libre o en movimiento</div>
+                    </div>
+                    <div class="option" onclick="selectOption(4, 'lab')" data-value="lab">
+                        <div class="option-icon">🔬</div>
+                        <div class="option-text">Laboratorio o entorno técnico</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(4)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(4)" disabled id="nextBtn4">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question5">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 5 de 10</div>
+                <h2 class="question-title">¿Qué habilidad te define mejor?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(5, 'communication')" data-value="communication">
+                        <div class="option-icon">💬</div>
+                        <div class="option-text">Comunicación efectiva</div>
+                    </div>
+                    <div class="option" onclick="selectOption(5, 'problem_solving')" data-value="problem_solving">
+                        <div class="option-icon">🧩</div>
+                        <div class="option-text">Resolución de problemas complejos</div>
+                    </div>
+                    <div class="option" onclick="selectOption(5, 'creativity')" data-value="creativity">
+                        <div class="option-icon">💡</div>
+                        <div class="option-text">Creatividad e innovación</div>
+                    </div>
+                    <div class="option" onclick="selectOption(5, 'organization')" data-value="organization">
+                        <div class="option-icon">📊</div>
+                        <div class="option-text">Organización y planificación</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(5)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(5)" disabled id="nextBtn5">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question6">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 6 de 10</div>
+                <h2 class="question-title">¿Qué te motiva más?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(6, 'impact')" data-value="impact">
+                        <div class="option-icon">🌍</div>
+                        <div class="option-text">Generar impacto social positivo</div>
+                    </div>
+                    <div class="option" onclick="selectOption(6, 'innovation')" data-value="innovation">
+                        <div class="option-icon">🚀</div>
+                        <div class="option-text">Innovar y crear cosas nuevas</div>
+                    </div>
+                    <div class="option" onclick="selectOption(6, 'success')" data-value="success">
+                        <div class="option-icon">🏆</div>
+                        <div class="option-text">Alcanzar metas y éxito profesional</div>
+                    </div>
+                    <div class="option" onclick="selectOption(6, 'knowledge')" data-value="knowledge">
+                        <div class="option-icon">📖</div>
+                        <div class="option-text">Aprender y descubrir constantemente</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(6)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(6)" disabled id="nextBtn6">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question7">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 7 de 10</div>
+                <h2 class="question-title">¿Qué tipo de retos disfrutas?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(7, 'technical')" data-value="technical">
+                        <div class="option-icon">⚙️</div>
+                        <div class="option-text">Desafíos técnicos y lógicos</div>
+                    </div>
+                    <div class="option" onclick="selectOption(7, 'creative')" data-value="creative">
+                        <div class="option-icon">🎪</div>
+                        <div class="option-text">Retos creativos y artísticos</div>
+                    </div>
+                    <div class="option" onclick="selectOption(7, 'interpersonal')" data-value="interpersonal">
+                        <div class="option-icon">🤗</div>
+                        <div class="option-text">Desafíos interpersonales</div>
+                    </div>
+                    <div class="option" onclick="selectOption(7, 'strategic')" data-value="strategic">
+                        <div class="option-icon">♟️</div>
+                        <div class="option-text">Retos estratégicos y de negocio</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(7)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(7)" disabled id="nextBtn7">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question8">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 8 de 10</div>
+                <h2 class="question-title">¿Cómo te ves en 10 años?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(8, 'expert')" data-value="expert">
+                        <div class="option-icon">🎓</div>
+                        <div class="option-text">Experto reconocido en mi campo</div>
+                    </div>
+                    <div class="option" onclick="selectOption(8, 'entrepreneur')" data-value="entrepreneur">
+                        <div class="option-icon">💼</div>
+                        <div class="option-text">Emprendedor con mi propio negocio</div>
+                    </div>
+                    <div class="option" onclick="selectOption(8, 'executive')" data-value="executive">
+                        <div class="option-icon">👔</div>
+                        <div class="option-text">Ejecutivo en empresa multinacional</div>
+                    </div>
+                    <div class="option" onclick="selectOption(8, 'balanced')" data-value="balanced">
+                        <div class="option-icon">⚖️</div>
+                        <div class="option-text">Balance entre vida personal y profesional</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(8)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(8)" disabled id="nextBtn8">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question9">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 9 de 10</div>
+                <h2 class="question-title">¿Qué tan importante es la remuneración económica?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(9, 'very_important')" data-value="very_important">
+                        <div class="option-icon">💰</div>
+                        <div class="option-text">Muy importante, es mi prioridad</div>
+                    </div>
+                    <div class="option" onclick="selectOption(9, 'important')" data-value="important">
+                        <div class="option-icon">💵</div>
+                        <div class="option-text">Importante, pero no lo único</div>
+                    </div>
+                    <div class="option" onclick="selectOption(9, 'moderate')" data-value="moderate">
+                        <div class="option-icon">⚖️</div>
+                        <div class="option-text">Moderadamente importante</div>
+                    </div>
+                    <div class="option" onclick="selectOption(9, 'passion')" data-value="passion">
+                        <div class="option-icon">❤️</div>
+                        <div class="option-text">Menos importante, prefiero pasión</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(9)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="nextQuestion(9)" disabled id="nextBtn9">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="question-section" id="question10">
+        <div class="container">
+            <div class="question-card">
+                <div class="question-number">Pregunta 10 de 10</div>
+                <h2 class="question-title">¿Qué país te atrae más para estudiar?</h2>
+                <div class="options">
+                    <div class="option" onclick="selectOption(10, 'usa')" data-value="usa">
+                        <div class="option-icon">🗽</div>
+                        <div class="option-text">Estados Unidos</div>
+                    </div>
+                    <div class="option" onclick="selectOption(10, 'uk')" data-value="uk">
+                        <div class="option-icon">🏰</div>
+                        <div class="option-text">Reino Unido</div>
+                    </div>
+                    <div class="option" onclick="selectOption(10, 'canada')" data-value="canada">
+                        <div class="option-icon">🍁</div>
+                        <div class="option-text">Canadá</div>
+                    </div>
+                    <div class="option" onclick="selectOption(10, 'australia')" data-value="australia">
+                        <div class="option-icon">🦘</div>
+                        <div class="option-text">Australia</div>
+                    </div>
+                </div>
+                <div class="navigation">
+                    <button class="btn btn-secondary" onclick="prevQuestion(10)">Anterior</button>
+                    <button class="btn btn-secondary" onclick="showLeadForm()" disabled id="nextBtn10">Ver Resultados</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Analysis Loader -->
+    <section class="analysis-loader" id="analysisLoader">
+        <div class="container">
+            <div class="analysis-card">
+                <div class="analysis-icon">
+                    <span class="analysis-brain">🧠</span>
+                </div>
+                <h3 class="analysis-title" id="analysisTitle">Analizando tus respuestas</h3>
+                <p class="analysis-text" id="analysisText">Identificando tus fortalezas y áreas de interés...</p>
+                <div class="analysis-dots">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Form Section -->
+    <section class="lead-form-section" id="leadFormSection">
+        <div class="container">
+            <div class="lead-form-card">
+                <img src="assets/logo-class-education.png" alt="Class Education" class="form-logo">
+                <h2>¡Últimos Datos!</h2>
+                <p>Para enviarte tu perfil vocacional completo y oportunidades personalizadas</p>
+                <form id="leadForm" onsubmit="submitLead(event)">
+                    <div class="form-group half">
+                        <label for="firstName">Nombre *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </div>
+                    <div class="form-group half">
+                        <label for="lastName">Apellidos *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Correo Electrónico *</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Teléfono (WhatsApp) *</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">País de Residencia *</label>
+                        <select id="country" name="country" required>
+                            <option value="">Selecciona tu país</option>
+                            <option value="Mexico">México</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Peru">Perú</option>
+                            <option value="Spain">España</option>
+                            <option value="Venezuela">Venezuela</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="Other">Otro</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="educationLevel">Nivel Educativo Actual *</label>
+                        <select id="educationLevel" name="educationLevel" required>
+                            <option value="">Selecciona tu nivel</option>
+                            <option value="High School">Preparatoria/Bachillerato</option>
+                            <option value="Undergraduate">Licenciatura en curso</option>
+                            <option value="Graduate">Licenciatura completada</option>
+                            <option value="Postgraduate">Posgrado</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-secondary" style="width: 100%; margin-top: 10px;">
+                        Ver Mis Resultados
+                    </button>
+                    <div class="loading" id="loadingSpinner">
+                        <div class="spinner"></div>
+                        <p>Procesando tu perfil vocacional...</p>
+                    </div>
+                </form>
+                <div class="privacy-notice">
+                    Al continuar, aceptas recibir información sobre programas de estudio. Tus datos están protegidos según nuestras políticas de privacidad.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="resultsSection">
+        <div class="container">
+            <div class="results-card">
+                <img src="assets/logo-class-education.png" alt="Class Education" class="results-logo">
+                <div class="results-icon" id="resultsIcon">🎯</div>
+                <h2>¡Tu Perfil Vocacional!</h2>
+                <div class="career-title" id="careerTitle">Ingeniería y Tecnología</div>
+                <div class="results-description" id="careerDescription">
+                    Tu perfil indica una fuerte inclinación hacia el pensamiento analítico y la resolución de problemas técnicos. 
+                    Destacas en áreas STEM y tienes potencial para sobresalir en carreras tecnológicas.
+                </div>
+                <div class="recommended-programs">
+                    <h3>Programas Recomendados en el Extranjero</h3>
+                    <ul class="program-list" id="programList">
+                        <li>Computer Science - MIT, Stanford</li>
+                        <li>Software Engineering - University of Waterloo</li>
+                        <li>Data Science - Imperial College London</li>
+                        <li>Artificial Intelligence - ETH Zurich</li>
+                    </ul>
+                </div>
+                <div class="cta-buttons">
+                    <a href="#" class="btn btn-primary" onclick="contactAdvisor()">Hablar con un Asesor</a>
+                    <a href="#" class="btn btn-secondary" onclick="downloadResults()">Descargar Reporte Completo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Test State
+        const testState = {
+            currentQuestion: 0,
+            answers: {},
+            userData: {},
+            totalQuestions: 10
+        };
+
+        // Career Profiles
+        const careerProfiles = {
+            engineering: {
+                icon: '🔧',
+                title: 'Ingeniería y Tecnología',
+                description: 'Tu perfil indica una fuerte inclinación hacia el pensamiento analítico y la resolución de problemas técnicos. Destacas en áreas STEM y tienes potencial para sobresalir en carreras tecnológicas innovadoras.',
+                programs: [
+                    'Computer Science - MIT, Stanford, Carnegie Mellon',
+                    'Software Engineering - University of Waterloo, TU Munich',
+                    'Data Science - Imperial College London, ETH Zurich',
+                    'Mechanical Engineering - Georgia Tech, TU Delft'
+                ]
+            },
+            business: {
+                icon: '📊',
+                title: 'Negocios y Emprendimiento',
+                description: 'Tienes un perfil emprendedor con habilidades de liderazgo y visión estratégica. Tu capacidad para la toma de decisiones y gestión te posiciona idealmente para carreras en negocios internacionales.',
+                programs: [
+                    'Business Administration - Harvard, INSEAD, London Business School',
+                    'International Business - NYU Stern, IE Business School',
+                    'Entrepreneurship - Babson College, Stanford GSB',
+                    'Marketing - Northwestern Kellogg, HEC Paris'
+                ]
+            },
+            creative: {
+                icon: '🎨',
+                title: 'Artes y Diseño Creativo',
+                description: 'Tu perfil creativo y artístico te distingue. Tienes una visión única y habilidades para expresarte a través de medios visuales y creativos, ideal para carreras en diseño, arte y comunicación visual.',
+                programs: [
+                    'Graphic Design - Rhode Island School of Design, Parsons',
+                    'Digital Media - NYU Tisch, USC School of Cinematic Arts',
+                    'Fine Arts - Central Saint Martins, Pratt Institute',
+                    'UX/UI Design - California College of the Arts, IED Barcelona'
+                ]
+            },
+            healthcare: {
+                icon: '⚕️',
+                title: 'Ciencias de la Salud',
+                description: 'Tu vocación por ayudar a otros y tu interés en las ciencias médicas te posicionan perfectamente para carreras en el sector salud. Tienes el perfil ideal para medicina, enfermería o áreas relacionadas.',
+                programs: [
+                    'Medicine - Johns Hopkins, Oxford, Karolinska Institute',
+                    'Nursing - University of Pennsylvania, King\'s College London',
+                    'Public Health - Harvard T.H. Chan, Imperial College',
+                    'Biotechnology - MIT, Cambridge, ETH Zurich'
+                ]
+            },
+            social: {
+                icon: '🌍',
+                title: 'Ciencias Sociales y Humanidades',
+                description: 'Tu perfil humanístico y social te destaca. Tienes interés genuino en comprender la sociedad, la cultura y el comportamiento humano, ideal para carreras en ciencias sociales, educación y desarrollo social.',
+                programs: [
+                    'Psychology - Stanford, Cambridge, Amsterdam',
+                    'International Relations - Georgetown, LSE, Sciences Po',
+                    'Sociology - Berkeley, Oxford, Toronto',
+                    'Education - Harvard, UCL Institute of Education'
+                ]
+            },
+            science: {
+                icon: '🔬',
+                title: 'Ciencias Puras y Investigación',
+                description: 'Tu curiosidad científica y pasión por el descubrimiento te posicionan para carreras en investigación y ciencias puras. Tienes el perfil para contribuir al avance del conocimiento científico.',
+                programs: [
+                    'Physics - Caltech, Cambridge, ETH Zurich',
+                    'Chemistry - MIT, Oxford, Max Planck Institute',
+                    'Biology - Harvard, Cambridge, Heidelberg',
+                    'Mathematics - Princeton, Cambridge, École Polytechnique'
+                ]
+            }
+        };
+
+        // Start Test
+        function startTest() {
+            document.getElementById('heroSection').style.display = 'none';
+            document.getElementById('question1').classList.add('active');
+            document.getElementById('progressContainer').classList.add('active');
+            updateProgress();
+        }
+
+        // Select Option
+        function selectOption(questionNum, value) {
+            const options = document.querySelectorAll(`#question${questionNum} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+            
+            testState.answers[`q${questionNum}`] = value;
+            document.getElementById(`nextBtn${questionNum}`).disabled = false;
+        }
+
+        // Analysis messages for each checkpoint
+        const analysisMessages = {
+            3: {
+                title: "Analizando tus intereses",
+                text: "Identificando tus áreas de preferencia..."
+            },
+            6: {
+                title: "Evaluando tu perfil",
+                text: "Procesando tus habilidades y motivaciones..."
+            },
+            9: {
+                title: "Casi listo",
+                text: "Preparando tus resultados personalizados..."
+            },
+            10: {
+                title: "¡Análisis completado!",
+                text: "Hemos identificado tu perfil vocacional ideal"
+            }
+        };
+
+        // Show Analysis Loader
+        function showAnalysisLoader(currentNum, callback) {
+            const loader = document.getElementById('analysisLoader');
+            const title = document.getElementById('analysisTitle');
+            const text = document.getElementById('analysisText');
+
+            // Set custom message
+            if (analysisMessages[currentNum]) {
+                title.textContent = analysisMessages[currentNum].title;
+                text.textContent = analysisMessages[currentNum].text;
+            }
+
+            // Hide progress bar during analysis
+            document.getElementById('progressContainer').style.display = 'none';
+
+            // Show loader
+            loader.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // After 2 seconds, hide loader and continue
+            setTimeout(() => {
+                loader.classList.remove('active');
+                document.getElementById('progressContainer').style.display = 'block';
+                callback();
+            }, 2000);
+        }
+
+        // Next Question
+        function nextQuestion(currentNum) {
+            const current = document.getElementById(`question${currentNum}`);
+            const next = document.getElementById(`question${currentNum + 1}`);
+
+            // Check if we need to show analysis loader (after questions 3, 6, 9)
+            if ([3, 6, 9].includes(currentNum)) {
+                current.classList.remove('active');
+                showAnalysisLoader(currentNum, () => {
+                    if (next) {
+                        next.classList.add('active');
+                        testState.currentQuestion = currentNum;
+                        updateProgress();
+                    }
+                });
+            } else {
+                current.classList.remove('active');
+                if (next) {
+                    next.classList.add('active');
+                    testState.currentQuestion = currentNum;
+                    updateProgress();
+                }
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Previous Question
+        function prevQuestion(currentNum) {
+            const current = document.getElementById(`question${currentNum}`);
+            const prev = document.getElementById(`question${currentNum - 1}`);
+            
+            current.classList.remove('active');
+            prev.classList.add('active');
+            testState.currentQuestion = currentNum - 2;
+            updateProgress();
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Update Progress
+        function updateProgress() {
+            const progress = ((testState.currentQuestion + 1) / testState.totalQuestions) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            document.getElementById('progressText').textContent = 
+                `Pregunta ${testState.currentQuestion + 1} de ${testState.totalQuestions}`;
+        }
+
+        // Show Lead Form
+        function showLeadForm() {
+            document.getElementById('question10').classList.remove('active');
+
+            // Show final analysis loader
+            const loader = document.getElementById('analysisLoader');
+            const title = document.getElementById('analysisTitle');
+            const text = document.getElementById('analysisText');
+
+            title.textContent = analysisMessages[10].title;
+            text.textContent = analysisMessages[10].text;
+
+            document.getElementById('progressContainer').style.display = 'none';
+            loader.classList.add('active');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            // After 2.5 seconds, show the lead form
+            setTimeout(() => {
+                loader.classList.remove('active');
+                document.getElementById('leadFormSection').classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 2500);
+        }
+
+        // Submit Lead to Zoho CRM
+        async function submitLead(event) {
+            event.preventDefault();
+
+            // Show loading
+            document.getElementById('loadingSpinner').classList.add('active');
+            document.querySelector('#leadForm button[type="submit"]').disabled = true;
+
+            // Calcular el perfil ANTES de enviar los datos
+            const profile = calculateCareerProfile();
+            const profileNames = {
+                engineering: 'Ingeniería y Tecnología',
+                business: 'Negocios y Emprendimiento',
+                creative: 'Artes y Diseño Creativo',
+                healthcare: 'Ciencias de la Salud',
+                social: 'Ciencias Sociales y Humanidades',
+                science: 'Ciencias Puras e Investigación'
+            };
+
+            // Collect form data
+            const formData = new FormData(event.target);
+
+            // URL base del sitio
+            const baseURL = 'https://vocacional.classeducation.com';
+            const firstName = formData.get('firstName');
+            const resultURL = `${baseURL}/resultados/${profile}.html?nombre=${encodeURIComponent(firstName)}`;
+            testState.userData = {
+                First_Name: formData.get('firstName'),
+                Last_Name: formData.get('lastName'),
+                Email: formData.get('email'),
+                Phone: formData.get('phone'),
+                Country: formData.get('country'),
+                Education_Level: formData.get('educationLevel'),
+                Lead_Source: 'Meta Ads - Test Vocacional',
+                Test_Answers: JSON.stringify(testState.answers),
+                Test_Date: new Date().toISOString(),
+                // Nuevos campos para el email
+                Profile_ID: profile,
+                Profile_Name: profileNames[profile],
+                Result_URL: resultURL
+            };
+
+            // Guardar datos en localStorage para la página de confirmación
+            localStorage.setItem('testUserData', JSON.stringify(testState.userData));
+            localStorage.setItem('testAnswers', JSON.stringify(testState.answers));
+            localStorage.setItem('testProfile', profile);
+
+            try {
+                // IMPORTANTE: Reemplaza esta URL con tu webhook de Zoho Flow
+                // En Zoho Flow configura: Recibir webhook → Crear Lead → Enviar Email
+                const zohoWebhookURL = 'https://flow.zoho.com/909126769/flow/webhook/incoming?zapikey=1001.4746da36f75b49087dfa77bc89c6b245.29c4c2b65a242c0d7d076fc82fc80ad9&isdebug=false';
+
+                // Enviar a Zoho Flow (incluye perfil y URL para el email)
+                const response = await fetch(zohoWebhookURL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(testState.userData)
+                });
+
+                // Track conversion for Meta Ads
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'Test Vocacional Completado',
+                        career_profile: profile,
+                        value: 10.00,
+                        currency: 'USD'
+                    });
+                }
+
+                // Redirigir a página de confirmación (NO al resultado)
+                window.location.href = 'confirmacion.html';
+
+            } catch (error) {
+                console.error('Error al enviar lead:', error);
+                // Aún así redirigir a confirmación para mejor UX
+                window.location.href = 'confirmacion.html';
+            }
+        }
+
+        // Calculate Career Profile
+        function calculateCareerProfile() {
+            const answers = testState.answers;
+            const scores = {
+                engineering: 0,
+                business: 0,
+                creative: 0,
+                healthcare: 0,
+                social: 0,
+                science: 0
+            };
+
+            // Q1: Tipo de actividades que disfruta
+            if (answers.q1 === 'creative') {
+                scores.creative += 3;
+            } else if (answers.q1 === 'analytical') {
+                scores.engineering += 2;
+                scores.science += 2;
+            } else if (answers.q1 === 'social') {
+                scores.social += 2;
+                scores.healthcare += 2;
+            } else if (answers.q1 === 'entrepreneurial') {
+                scores.business += 3;
+            }
+
+            // Q2: Materia favorita
+            if (answers.q2 === 'humanities') {
+                scores.social += 3;
+            } else if (answers.q2 === 'sciences') {
+                scores.science += 2;
+                scores.healthcare += 2;
+            } else if (answers.q2 === 'math') {
+                scores.engineering += 2;
+                scores.science += 2;
+            } else if (answers.q2 === 'arts') {
+                scores.creative += 3;
+            }
+
+            // Q3: Preferencia de trabajo
+            if (answers.q3 === 'independent') {
+                scores.science += 2;
+                scores.creative += 1;
+            } else if (answers.q3 === 'team') {
+                scores.social += 1;
+                scores.healthcare += 2;
+            } else if (answers.q3 === 'leadership') {
+                scores.business += 3;
+            } else if (answers.q3 === 'support') {
+                scores.healthcare += 3;
+                scores.social += 1;
+            }
+
+            // Q4: Ambiente laboral preferido
+            if (answers.q4 === 'office') {
+                scores.business += 2;
+                scores.engineering += 1;
+            } else if (answers.q4 === 'creative') {
+                scores.creative += 3;
+            } else if (answers.q4 === 'outdoor') {
+                scores.social += 2;
+                scores.healthcare += 1;
+            } else if (answers.q4 === 'lab') {
+                scores.science += 3;
+                scores.healthcare += 1;
+            }
+
+            // Q5: Habilidad que lo define
+            if (answers.q5 === 'communication') {
+                scores.social += 2;
+                scores.business += 2;
+            } else if (answers.q5 === 'problem_solving') {
+                scores.engineering += 3;
+                scores.science += 1;
+            } else if (answers.q5 === 'creativity') {
+                scores.creative += 3;
+            } else if (answers.q5 === 'organization') {
+                scores.business += 2;
+                scores.healthcare += 1;
+            }
+
+            // Q6: Motivación principal
+            if (answers.q6 === 'impact') {
+                scores.social += 2;
+                scores.healthcare += 2;
+            } else if (answers.q6 === 'innovation') {
+                scores.engineering += 2;
+                scores.creative += 2;
+            } else if (answers.q6 === 'success') {
+                scores.business += 3;
+            } else if (answers.q6 === 'knowledge') {
+                scores.science += 3;
+            }
+
+            // Q7: Tipo de retos que disfruta
+            if (answers.q7 === 'technical') {
+                scores.engineering += 3;
+                scores.science += 1;
+            } else if (answers.q7 === 'creative') {
+                scores.creative += 3;
+            } else if (answers.q7 === 'interpersonal') {
+                scores.social += 2;
+                scores.healthcare += 2;
+            } else if (answers.q7 === 'strategic') {
+                scores.business += 3;
+            }
+
+            // Q8: Cómo se ve en 10 años
+            if (answers.q8 === 'expert') {
+                scores.science += 2;
+                scores.engineering += 2;
+            } else if (answers.q8 === 'entrepreneur') {
+                scores.business += 3;
+            } else if (answers.q8 === 'executive') {
+                scores.business += 2;
+                scores.engineering += 1;
+            } else if (answers.q8 === 'balanced') {
+                scores.social += 2;
+                scores.healthcare += 1;
+                scores.creative += 1;
+            }
+
+            // Q9: Importancia de remuneración económica
+            if (answers.q9 === 'very_important') {
+                scores.business += 2;
+                scores.engineering += 1;
+            } else if (answers.q9 === 'important') {
+                scores.engineering += 1;
+                scores.healthcare += 1;
+            } else if (answers.q9 === 'moderate') {
+                scores.science += 1;
+                scores.social += 1;
+            } else if (answers.q9 === 'passion') {
+                scores.creative += 2;
+                scores.social += 2;
+            }
+
+            // Find highest score (en caso de empate, aleatoriza para evitar sesgo)
+            let maxScore = 0;
+            let topProfiles = [];
+
+            for (const [key, value] of Object.entries(scores)) {
+                if (value > maxScore) {
+                    maxScore = value;
+                    topProfiles = [key];
+                } else if (value === maxScore) {
+                    topProfiles.push(key);
+                }
+            }
+
+            // Si hay empate, elegir aleatoriamente entre los mejores
+            const profile = topProfiles[Math.floor(Math.random() * topProfiles.length)];
+
+            return profile;
+        }
+
+        // Show Results - Función auxiliar (el flujo principal ahora va a confirmacion.html)
+        // Esta función se puede usar para acceso directo si es necesario
+        function showResults() {
+            const profile = localStorage.getItem('testProfile') || calculateCareerProfile();
+            window.location.href = `resultados/${profile}.html`;
+        }
+
+        // Contact Advisor
+        function contactAdvisor() {
+            // Aquí puedes agregar lógica para abrir WhatsApp, calendario, etc.
+            alert('¡Gracias! Un asesor se pondrá en contacto contigo en las próximas 24 horas.');
+            
+            // Track event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact');
+            }
+        }
+
+        // Download Results
+        function downloadResults() {
+            alert('Tu reporte completo ha sido enviado a tu correo electrónico.');
+            
+            // Track event
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Download');
+            }
+        }
+    </script>
+
+    <!-- Meta Pixel Code (Reemplaza YOUR_PIXEL_ID con tu ID real) -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID'); // Reemplaza con tu Pixel ID
+        fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=YOUR_PIXEL_ID&ev=PageView&noscript=1"/>
+    </noscript>
+</body>
+</html>

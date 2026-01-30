@@ -1,0 +1,16 @@
+node_modules/
+.DS_Store
+Thumbs.db
+.env
+*.log
+
+# Archivos de desarrollo local
+package.json
+package-lock.json
+.cursorrules
+
+# Documentación (opcional, no necesaria en producción)
+CONTEXTO_SESION.md
+GUIA_IMPLEMENTACION.md
+GUIA_ZOHO_FLOW.md
+LOGICA_CALIFICACION.md

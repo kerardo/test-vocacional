@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Revisa tu Correo! - Class Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #cf142c;
+            --secondary: #000000;
+            --accent: #ff3a4f;
+            --dark: #1a1a1a;
+            --light: #FAFAFA;
+            --success: #06D6A0;
+            --gray: #444444;
+            --gradient-hero: linear-gradient(135deg, #cf142c 0%, #a01024 50%, #6b0a15 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--gradient-hero);
+            color: var(--dark);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .confirmation-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .confirmation-card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px 40px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+            max-width: 550px;
+            width: 100%;
+            text-align: center;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .confirmation-logo {
+            display: block;
+            height: 60px;
+            width: auto;
+            margin: 0 auto 30px;
+            border-radius: 8px;
+        }
+
+        .confirmation-icon {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--success) 0%, #04b88a 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            animation: bounceIn 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .confirmation-icon span {
+            font-size: 50px;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .confirmation-card h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+        }
+
+        .confirmation-card .subtitle {
+            font-size: 1.1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .confirmation-card p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .email-box {
+            background: linear-gradient(135deg, rgba(207, 20, 44, 0.05) 0%, rgba(207, 20, 44, 0.1) 100%);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 25px 0;
+            border-left: 4px solid var(--primary);
+        }
+
+        .email-box p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .email-box strong {
+            color: var(--primary);
+        }
+
+        .user-email {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--dark);
+            background: white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-top: 10px;
+            border: 1px solid #eee;
+        }
+
+        .steps-section {
+            text-align: left;
+            margin: 30px 0;
+        }
+
+        .steps-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--dark);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .step-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+
+        .step-text {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            padding-top: 4px;
+        }
+
+        .spam-notice {
+            background: #fff8e6;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 25px 0;
+            border: 1px solid #ffeeba;
+        }
+
+        .spam-notice p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #856404;
+        }
+
+        .spam-notice strong {
+            color: #856404;
+        }
+
+        .cta-section {
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 30px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .social-section {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid #eee;
+        }
+
+        .social-section p {
+            font-size: 0.85rem;
+            color: #999;
+            margin-bottom: 15px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            text-decoration: none;
+            transition: transform 0.3s;
+            background: var(--light);
+            color: var(--dark);
+            border: 1px solid #eee;
+        }
+
+        .social-link:hover {
+            transform: scale(1.1);
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .footer-note {
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #999;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .confirmation-section {
+                padding: 20px 15px;
+            }
+
+            .confirmation-card {
+                padding: 35px 25px;
+                border-radius: 16px;
+            }
+
+            .confirmation-logo {
+                height: 50px;
+            }
+
+            .confirmation-icon {
+                width: 80px;
+                height: 80px;
+            }
+
+            .confirmation-icon span {
+                font-size: 40px;
+            }
+
+            .confirmation-card h1 {
+                font-size: 1.4rem;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <section class="confirmation-section">
+        <div class="container">
+            <div class="confirmation-card">
+                <img src="assets/logo-class-education.png" alt="Class Education" class="confirmation-logo">
+
+                <div class="confirmation-icon">
+                    <span>✉️</span>
+                </div>
+
+                <h1>¡Revisa tu Correo!</h1>
+                <p class="subtitle">Tu perfil vocacional está en camino</p>
+
+                <p>
+                    Hemos analizado tus respuestas y preparado un perfil vocacional
+                    personalizado con recomendaciones de programas internacionales.
+                </p>
+
+                <div class="email-box">
+                    <p><strong>Enviamos tu resultado a:</strong></p>
+                    <div class="user-email" id="userEmail">correo@ejemplo.com</div>
+                </div>
+
+                <div class="steps-section">
+                    <h3>Próximos pasos:</h3>
+                    <div class="step-item">
+                        <div class="step-number">1</div>
+                        <div class="step-text">Revisa tu bandeja de entrada (y spam, por si acaso)</div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">2</div>
+                        <div class="step-text">Abre el correo de <strong>Class Education</strong></div>
+                    </div>
+                    <div class="step-item">
+                        <div class="step-number">3</div>
+                        <div class="step-text">Haz clic en el enlace para ver tu perfil completo</div>
+                    </div>
+                </div>
+
+                <div class="spam-notice">
+                    <p><strong>¿No ves el correo?</strong> Revisa tu carpeta de spam o promociones.
+                    Si después de 5 minutos no llega, contáctanos.</p>
+                </div>
+
+                <div class="cta-section">
+                    <a href="https://classeducation.com" class="btn btn-outline">Volver al Inicio</a>
+                </div>
+
+                <div class="social-section">
+                    <p>Síguenos en redes sociales</p>
+                    <div class="social-links">
+                        <a href="https://facebook.com/classeducation" target="_blank" class="social-link">f</a>
+                        <a href="https://instagram.com/classeducation" target="_blank" class="social-link">📷</a>
+                        <a href="https://linkedin.com/company/classeducation" target="_blank" class="social-link">in</a>
+                        <a href="https://youtube.com/classeducation" target="_blank" class="social-link">▶</a>
+                    </div>
+                </div>
+
+                <p class="footer-note">
+                    © 2026 Class Education - Todos los derechos reservados
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Obtener email del usuario desde localStorage
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('testUserData');
+            if (userData) {
+                const data = JSON.parse(userData);
+                if (data.Email) {
+                    document.getElementById('userEmail').textContent = data.Email;
+                }
+            }
+        });
+
+        // Track page view
+        if (typeof fbq !== 'undefined') {
+            fbq('track', 'CompleteRegistration', {
+                content_name: 'Test Vocacional - Email Enviado'
+            });
+        }
+    </script>
+
+    <!-- Meta Pixel Code -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'YOUR_PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+</body>
+</html>
