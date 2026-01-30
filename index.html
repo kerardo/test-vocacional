@@ -1659,10 +1659,12 @@
                 const zohoWebhookURL = 'https://flow.zoho.com/909126769/flow/webhook/incoming?zapikey=1001.4746da36f75b49087dfa77bc89c6b245.29c4c2b65a242c0d7d076fc82fc80ad9&isdebug=false';
 
                 // Enviar a Zoho Flow (incluye perfil y URL para el email)
-                const response = await fetch(zohoWebhookURL, {
+                // mode: 'no-cors' necesario porque Zoho no permite CORS desde navegador
+                await fetch(zohoWebhookURL, {
                     method: 'POST',
+                    mode: 'no-cors',
                     headers: {
-                        'Content-Type': 'application/json',
+                        'Content-Type': 'text/plain',
                     },
                     body: JSON.stringify(testState.userData)
                 });
