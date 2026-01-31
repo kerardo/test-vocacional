@@ -1656,7 +1656,8 @@
             try {
                 // IMPORTANTE: Reemplaza esta URL con tu webhook de Zoho Flow
                 // En Zoho Flow configura: Recibir webhook → Crear Lead → Enviar Email
-                const zohoWebhookURL = 'https://flow.zoho.com/909126769/flow/webhook/incoming?zapikey=1001.4746da36f75b49087dfa77bc89c6b245.29c4c2b65a242c0d7d076fc82fc80ad9&isdebug=false';
+                // TEMPORAL: Probando con webhook.site para diagnóstico
+                const zohoWebhookURL = 'https://webhook.site/31d0fa16-5c45-4e6c-bf8d-2ca775e60dd3';
 
                 // Enviar a Zoho Flow usando sendBeacon (más confiable)
                 const formData = new FormData();
