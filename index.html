@@ -1658,12 +1658,34 @@
                 // En Zoho Flow configura: Recibir webhook → Crear Lead → Enviar Email
                 const zohoWebhookURL = 'https://flow.zoho.com/909126769/flow/webhook/incoming?zapikey=1001.4746da36f75b49087dfa77bc89c6b245.29c4c2b65a242c0d7d076fc82fc80ad9&isdebug=false';
 
-                // Enviar a Zoho Flow usando URL params (evita problemas de CORS)
-                const params = new URLSearchParams(testState.userData);
-                await fetch(zohoWebhookURL + '&' + params.toString(), {
-                    method: 'POST',
-                    mode: 'no-cors'
+                // Enviar a Zoho Flow mediante formulario oculto (evita CORS)
+                const iframe = document.createElement('iframe');
+                iframe.name = 'zoho_target';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = zohoWebhookURL;
+                form.target = 'zoho_target';
+
+                // Agregar cada campo como input hidden
+                Object.entries(testState.userData).forEach(([key, value]) => {
+                    const input = document.createElement('input');
+                    input.type = 'hidden';
+                    input.name = key;
+                    input.value = typeof value === 'object' ? JSON.stringify(value) : value;
+                    form.appendChild(input);
                 });
+
+                document.body.appendChild(form);
+                form.submit();
+
+                // Limpiar después de enviar
+                setTimeout(() => {
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                }, 2000);
 
                 // Track conversion for Meta Ads
                 if (typeof fbq !== 'undefined') {
