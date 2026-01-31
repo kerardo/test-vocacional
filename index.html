@@ -1656,15 +1656,16 @@
             try {
                 // IMPORTANTE: Reemplaza esta URL con tu webhook de Zoho Flow
                 // En Zoho Flow configura: Recibir webhook → Crear Lead → Enviar Email
-                // TEMPORAL: Probando con webhook.site para diagnóstico
-                const zohoWebhookURL = 'https://webhook.site/31d0fa16-5c45-4e6c-bf8d-2ca775e60dd3';
+                const zohoWebhookURL = 'https://flow.zoho.com/909126769/flow/webhook/incoming?zapikey=1001.4746da36f75b49087dfa77bc89c6b245.29c4c2b65a242c0d7d076fc82fc80ad9&isdebug=false';
 
-                // Enviar a Zoho Flow usando sendBeacon (más confiable)
-                const formData = new FormData();
+                // Enviar a Zoho Flow como URL-encoded (más compatible)
+                const params = new URLSearchParams();
                 Object.entries(testState.userData).forEach(([key, value]) => {
-                    formData.append(key, typeof value === 'object' ? JSON.stringify(value) : value);
+                    params.append(key, typeof value === 'object' ? JSON.stringify(value) : value);
                 });
-                navigator.sendBeacon(zohoWebhookURL, formData);
+
+                const blob = new Blob([params.toString()], { type: 'application/x-www-form-urlencoded' });
+                navigator.sendBeacon(zohoWebhookURL, blob);
 
                 // Track conversion for Meta Ads
                 if (typeof fbq !== 'undefined') {
