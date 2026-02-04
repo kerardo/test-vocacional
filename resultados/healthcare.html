@@ -231,6 +231,20 @@
 
         .footer-note { margin-top: 25px; font-size: 0.8rem; color: #999; }
 
+        .folio-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, rgba(207, 20, 44, 0.1) 0%, rgba(207, 20, 44, 0.05) 100%);
+            border: 1px solid rgba(207, 20, 44, 0.2);
+            color: var(--primary);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            font-family: 'Montserrat', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
         @media (max-width: 768px) {
             .results-section { padding: 20px 15px; }
             .results-card { padding: 25px 20px; border-radius: 16px; }
@@ -251,19 +265,25 @@
             <div class="results-card">
                 <img src="../assets/logo-class-education.png" alt="Class Education" class="results-logo">
 
+                <div class="folio-badge" id="folioBadge">Folio: ---</div>
+
                 <div class="results-icon">⚕️</div>
 
                 <h1 id="greeting">Tu Perfil Vocacional</h1>
                 <div class="career-title">Ciencias de la Salud</div>
 
                 <script>
-                    // Personalizar saludo con el nombre del usuario (desde URL)
+                    // Personalizar saludo y folio desde URL
                     (function() {
                         const params = new URLSearchParams(window.location.search);
                         const nombre = params.get('nombre');
+                        const folio = params.get('folio');
                         if (nombre) {
                             document.getElementById('greeting').innerHTML =
                                 '¡Hola <span style="color: var(--primary);">' + decodeURIComponent(nombre) + '</span>!<br>Tu Perfil Vocacional';
+                        }
+                        if (folio) {
+                            document.getElementById('folioBadge').textContent = 'Folio: ' + folio;
                         }
                     })();
                 </script>
@@ -341,9 +361,16 @@
             if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: 'Healthcare Profile' });
         }
 
-        function downloadReport() {
-            alert('Tu reporte completo será enviado a tu correo electrónico registrado.');
-            if (typeof fbq !== 'undefined') fbq('track', 'Download', { content_name: 'Healthcare Report' });
+        async function downloadReport() {
+            const profileData = {
+                icon: '⚕️',
+                title: 'Ciencias de la Salud',
+                description: 'Tu vocación por ayudar a otros y tu interés en las ciencias médicas te posicionan perfectamente para carreras en el sector salud.',
+                stats: { salary: '$90K+', growth: '+15%', demand: 'Esencial' },
+                strengths: ['Empatía y compasión', 'Vocación de servicio', 'Pensamiento científico', 'Atención al detalle', 'Resiliencia emocional', 'Trabajo bajo presión']
+            };
+            const programs = await ProgramsLoader.getProgramsByProfile('healthcare');
+            await PDFGenerator.downloadPDF(profileData, programs);
         }
 
         function shareWhatsApp() {
@@ -362,6 +389,7 @@
 
     <!-- Cargar programas desde Google Sheets -->
     <script src="../assets/programs-loader.js"></script>
+    <script src="../assets/pdf-generator.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             ProgramsLoader.renderPrograms('programsList', 'healthcare', 6);

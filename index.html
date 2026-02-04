@@ -1604,6 +1604,20 @@
             }, 2500);
         }
 
+        // Generar folio único
+        function generateFolio() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+            let random = '';
+            for (let i = 0; i < 6; i++) {
+                random += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return `CE${year}${month}${day}${random}`;
+        }
+
         // Submit Lead to Zoho CRM
         async function submitLead(event) {
             event.preventDefault();
@@ -1611,6 +1625,9 @@
             // Show loading
             document.getElementById('loadingSpinner').classList.add('active');
             document.querySelector('#leadForm button[type="submit"]').disabled = true;
+
+            // Generar folio único para este lead
+            const folio = generateFolio();
 
             // Calcular el perfil ANTES de enviar los datos
             const profile = calculateCareerProfile();
@@ -1629,13 +1646,14 @@
             // URL base del sitio
             const baseURL = 'https://vocacional.classeducation.com';
             const firstName = formData.get('firstName');
-            const resultURL = `${baseURL}/resultados/${profile}.html?nombre=${encodeURIComponent(firstName)}`;
+            const resultURL = `${baseURL}/resultados/${profile}.html?folio=${folio}&nombre=${encodeURIComponent(firstName)}`;
             // Combinar código de país + número de WhatsApp
             const countryCode = formData.get('countryCode');
             const phoneNumber = formData.get('phone');
             const fullWhatsApp = countryCode + phoneNumber;
 
             testState.userData = {
+                Folio: folio,
                 First_Name: formData.get('firstName'),
                 Last_Name: formData.get('lastName'),
                 Email: formData.get('email'),
