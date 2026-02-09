@@ -356,8 +356,7 @@
 
     <script>
         function contactAdvisor() {
-            const message = encodeURIComponent('Hola, acabo de completar el Test Vocacional y mi perfil es Ciencias Puras e Investigación. Me gustaría recibir más información sobre programas en el extranjero.');
-            window.open(`https://wa.me/5215585333086?text=${message}`, '_blank');
+            window.open('https://api.whatsapp.com/send/?phone=5215585333086&text=Hola%2C+acabo+de+hacer+el+test+vocacional+y+me+gustar%C3%ADa+m%C3%A1s+informaci%C3%B3n&type=phone_number&app_absent=0', '_blank');
             if (typeof fbq !== 'undefined') fbq('track', 'Contact', { content_name: 'Science Profile' });
         }
 
